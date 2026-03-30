@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ben [Last Name] | Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #faf9f7;
+      --color-text: #1a1a1a;
+      --color-text-secondary: #555;
+      --color-accent: #2d5a27;
+      --color-accent-hover: #3d7a34;
+      --color-border: #e0ddd8;
+      --color-tag-bg: #eef2ed;
+      --color-tag-text: #2d5a27;
+      --color-timeline-dot: #2d5a27;
+      --max-width: 720px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.7;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    a:hover { color: var(--color-accent-hover); text-decoration: underline; }
+
+    /* ── Header / Profile ── */
+    .header {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 60px 24px 0;
+      display: flex;
+      gap: 36px;
+      align-items: flex-start;
+    }
+
+    .profile-photo {
+      width: 160px;
+      height: 160px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--color-border);
+      /* placeholder color until you add your photo */
+    }
+
+    .profile-photo-placeholder {
+      width: 160px;
+      height: 160px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #c8d5c6 0%, #a3b5a0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 48px;
+      font-family: 'Source Serif 4', serif;
+      font-weight: 600;
+    }
+
+    .profile-info h1 {
+      font-family: 'Source Serif 4', serif;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .profile-info .subtitle {
+      color: var(--color-text-secondary);
+      font-size: 15px;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .profile-info .email {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      margin-bottom: 16px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      font-size: 13px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: 5px;
+      background: var(--color-tag-bg);
+      color: var(--color-tag-text);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    nav a:hover {
+      background: var(--color-accent);
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* ── Sections ── */
+    .content {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .section {
+      margin-top: 48px;
+    }
+
+    .section h2 {
+      font-family: 'Source Serif 4', serif;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--color-border);
+      letter-spacing: -0.3px;
+    }
+
+    /* ── Bio ── */
+    .bio p {
+      margin-bottom: 14px;
+      color: var(--color-text);
+    }
+
+    /* ── Publications / Writing ── */
+    .pub-filters {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 20px;
+    }
+
+    .pub-filters button {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 4px 14px;
+      border-radius: 5px;
+      border: 1px solid var(--color-border);
+      background: transparent;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .pub-filters button.active,
+    .pub-filters button:hover {
+      background: var(--color-accent);
+      color: #fff;
+      border-color: var(--color-accent);
+    }
+
+    .pub-item {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .pub-item:last-child { border-bottom: none; }
+
+    .pub-title {
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+
+    .pub-authors {
+      font-size: 13.5px;
+      color: var(--color-text-secondary);
+      margin-bottom: 4px;
+      line-height: 1.5;
+    }
+
+    .pub-authors .me {
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .pub-venue {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--color-text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .pub-links a {
+      font-size: 12.5px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 4px;
+      background: var(--color-tag-bg);
+      color: var(--color-tag-text);
+      margin-right: 6px;
+      transition: background 0.2s;
+    }
+    .pub-links a:hover {
+      background: var(--color-accent);
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* ── Writing ── */
+    .writing-item {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .writing-item:last-child { border-bottom: none; }
+
+    .writing-title {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .writing-desc {
+      font-size: 13.5px;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    /* ── Experience Timeline ── */
+    .timeline {
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--color-border);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 0 0 28px 0;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -24px;
+      top: 7px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--color-bg);
+      border: 2.5px solid var(--color-timeline-dot);
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 2px;
+    }
+
+    .timeline-org {
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .timeline-dates {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+    }
+
+    .timeline-role {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 24px;
+      border-top: 1px solid var(--color-border);
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      text-align: center;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding-top: 40px;
+      }
+      nav { justify-content: center; }
+      .profile-info h1 { font-size: 26px; }
+      .timeline-header { flex-direction: column; gap: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="header">
+    <!-- Replace with <img src="assets/photo.jpg" class="profile-photo" alt="Ben"> -->
+    <div class="profile-photo-placeholder">B</div>
+
+    <div class="profile-info">
+      <h1>Ben [Last Name]</h1>
+      <div class="subtitle">
+        AI Safety Researcher · Software Engineer<br>
+        MIT
+      </div>
+      <div class="email">[first]@email.com</div>
+      <nav>
+        <a href="#bio">Bio</a>
+        <a href="#research">Research</a>
+        <a href="#writing">Writing</a>
+        <a href="#experience">Experience</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <!-- ═══ BIO ═══ -->
+    <section class="section bio" id="bio">
+      <p>
+        Hi! I'm a software engineer and AI safety researcher with a focus on
+        <strong>sycophancy in large language models</strong> — specifically how user personas
+        shape model behavior and false validation rates. My current research uses Anthropic's
+        <a href="#">Petri framework</a> to study sycophantic tendencies across multiple frontier
+        models using 128 multidimensional persona combinations.
+      </p>
+      <p>
+        I'm also building a startup focused on AI-powered interactive kiosks for high-traffic
+        environments. Previously, I co-founded an elderly care computer vision startup during
+        my MBA.
+      </p>
+      <p>
+        I studied at <a href="https://mit.edu">MIT</a> and have worked across AI safety,
+        reinforcement learning, and full-stack engineering. I'm particularly interested in
+        RLHF mechanics, reward modeling, and building AI systems that are robustly aligned
+        with human values.
+      </p>
+    </section>
+
+    <!-- ═══ RESEARCH ═══ -->
+    <section class="section" id="research">
+      <h2>Research</h2>
+
+      <div class="pub-item">
+        <div class="pub-title">
+          [Your Paper Title on Sycophancy in LLMs]
+        </div>
+        <div class="pub-authors">
+          <span class="me">Ben [Last Name]</span>, [Co-authors]
+        </div>
+        <div class="pub-venue">
+          Preprint / Under Review. 2026.
+        </div>
+        <div class="pub-links">
+          <a href="#">Paper</a>
+          <a href="#">Code</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">
+          [Risk-Averse AI Systems: Training Approaches via Prompting, SFT, DPO, and Activation Engineering]
+        </div>
+        <div class="pub-authors">
+          <span class="me">Ben [Last Name]</span>, [Co-authors]
+        </div>
+        <div class="pub-venue">
+          [Venue]. 2025.
+        </div>
+        <div class="pub-links">
+          <a href="#">Paper</a>
+        </div>
+      </div>
+
+      <!-- Add more pub-items as needed -->
+
+    </section>
+
+    <!-- ═══ WRITING ═══ -->
+    <section class="section" id="writing">
+      <h2>Writing</h2>
+
+      <div class="writing-item">
+        <div class="writing-title">
+          <a href="#">Understanding Sycophancy in Large Language Models</a>
+        </div>
+        <div class="writing-desc">
+          A deep dive into how RLHF training creates sycophantic behavior, its societal
+          implications, and emerging approaches to mitigation.
+        </div>
+        <div class="pub-links">
+          <a href="#">Read Post</a>
+        </div>
+      </div>
+
+      <!-- Add more writing-items as needed -->
+
+    </section>
+
+    <!-- ═══ EXPERIENCE ═══ -->
+    <section class="section" id="experience">
+      <h2>Experience</h2>
+
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-org">[Startup Name]</span>
+            <span class="timeline-dates">2025 – present</span>
+          </div>
+          <div class="timeline-role">
+            <strong>Founder</strong><br>
+            AI-powered interactive kiosks for high-traffic environments
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-org">Independent Research</span>
+            <span class="timeline-dates">2024 – present</span>
+          </div>
+          <div class="timeline-role">
+            <strong>AI Safety Researcher</strong><br>
+            Sycophancy in LLMs, risk-averse AI systems, RLHF alignment
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-org">[Elderly Care Startup]</span>
+            <span class="timeline-dates">[Year] – [Year]</span>
+          </div>
+          <div class="timeline-role">
+            <strong>Co-Founder</strong><br>
+            Computer vision platform for elderly care, built during MBA
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-org">MIT</span>
+            <span class="timeline-dates">[Year] – [Year]</span>
+          </div>
+          <div class="timeline-role">
+            <strong>Student</strong><br>
+            [Program / Department]
+          </div>
+        </div>
+
+        <!-- Add more timeline items as needed -->
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    Ben [Last Name] · [first]@email.com
+  </footer>
+
+  <!-- Smooth scroll for nav links -->
+  <script>
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+
+</body>
+</html>
