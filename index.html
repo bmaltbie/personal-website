@@ -327,9 +327,17 @@
     .timeline-item.right::before { left: -7px; }
 
     .timeline-org {
+      display: inline;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
       font-weight: 600;
       font-size: 15px;
-      margin-bottom: 2px;
+      line-height: 1.9;
+      padding: 2px 8px;
+      background: var(--color-tag-bg);
+      color: var(--color-tag-text);
+      border: 1px solid var(--color-border);
+      border-radius: 5px;
     }
 
     .timeline-dates {
@@ -343,6 +351,7 @@
       font-size: 14px;
       color: var(--color-text-secondary);
       line-height: 1.5;
+      margin-top: 6px;
     }
 
     /* ── Footer ── */
@@ -430,7 +439,7 @@
       </p>
       <p>
         In the past year, I've been trying to transition into working as an AI safety researcher. My 
-        research interests are on societal impacts of AI, behavioral evals (particularly sycophancy and diverse personas), and black-box control. My experience so far is largely with multi-turn evals and training reward models.
+        research interests are on societal impacts of AI, behavioral evals (particularly sycophancy and diverse personas), and black-box control. My experience so far is largely with multi-turn evals, training reward models, and red-teaming.
       </p>
       
     </section>
