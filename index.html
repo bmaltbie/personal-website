@@ -17,6 +17,10 @@
       --color-tag-bg: #eef2ed;
       --color-tag-text: #2d5a27;
       --color-timeline-dot: #2d5a27;
+      --color-navy: #1f3b66;
+      --color-navy-hover: #2f558c;
+      --color-navy-pill-bg: #e2e8f4;
+      --color-navy-pill-border: #c7d3e8;
       --max-width: 720px;
     }
 
@@ -294,37 +298,77 @@
       padding-left: 28px;
     }
 
-    .timeline-item {
+    .tl-row {
       position: relative;
-      width: 50%;
-      box-sizing: border-box;
-      padding-bottom: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+      padding-bottom: 30px;
     }
-    .timeline-item:last-child { padding-bottom: 0; }
+    .tl-row:last-child { padding-bottom: 0; }
 
-    .timeline-item.left {
-      padding-right: 28px;
+    /* Left-column cards. Padding + equal negative margin outsets the box
+       around the content so the dot/connector stay aligned. */
+    .tl-exp {
+      border: 1px solid var(--color-border);
+      border-right: 3px solid var(--color-accent);
+      border-radius: 8px;
+      background: #fff;
+      padding: 10px 12px;
+      margin: -10px 12px -10px 0;
       text-align: right;
+      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
     }
-    .timeline-item.right {
-      margin-left: 50%;
+    .tl-exp:hover {
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+      transform: translateY(-1px);
+      border-right-color: var(--color-accent-hover);
+    }
+    .tl-out {
+      position: relative;
       padding-left: 28px;
-      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    /* Horizontal connector from the dot to the first role card. */
+    .tl-out:not(:empty)::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 28px;
+      height: 2px;
+      background: var(--color-border);
     }
 
-    .timeline-item::before {
+    /* Education rows use a navy accent instead of the default green. */
+    .tl-row.education .tl-exp {
+      border-right-color: var(--color-navy);
+    }
+    .tl-row.education .tl-exp:hover {
+      border-right-color: var(--color-navy-hover);
+    }
+    .tl-row.education .timeline-org {
+      background: var(--color-navy-pill-bg);
+      color: var(--color-navy);
+      border-color: var(--color-navy-pill-border);
+    }
+
+    .tl-row::before {
       content: '';
       position: absolute;
       top: 4px;
+      left: 50%;
+      transform: translateX(-50%);
       width: 14px;
       height: 14px;
       box-sizing: border-box;
       border-radius: 50%;
       background: var(--color-bg);
       border: 2.5px solid var(--color-timeline-dot);
+      z-index: 1;
     }
-    .timeline-item.left::before { right: -7px; }
-    .timeline-item.right::before { left: -7px; }
 
     .timeline-org {
       display: inline;
@@ -354,6 +398,66 @@
       margin-top: 6px;
     }
 
+    /* ── Fellowships & Internships (right column) ── */
+    .role-card {
+      border: 1px solid var(--color-border);
+      border-left: 3px solid var(--color-accent);
+      border-radius: 8px;
+      background: #fff;
+      padding: 11px 13px;
+      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+    }
+    .role-card:hover {
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+      transform: translateY(-1px);
+      border-left-color: var(--color-accent-hover);
+    }
+    .role-type {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background: var(--color-tag-bg);
+      padding: 2px 7px;
+      border-radius: 4px;
+      margin-bottom: 7px;
+    }
+    .role-org {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 1.35;
+      color: var(--color-text);
+    }
+    .role-meta {
+      font-size: 12.5px;
+      color: var(--color-text-secondary);
+      margin-top: 2px;
+    }
+    .role-desc {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.45;
+      margin-top: 6px;
+    }
+    .role-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      margin-top: 8px;
+    }
+    .role-links a {
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .role-note {
+      font-size: 12px;
+      font-style: italic;
+      color: var(--color-text-secondary);
+    }
+
     /* ── Footer ── */
     .footer {
       max-width: var(--max-width);
@@ -377,17 +481,20 @@
       .profile-info h1 { font-size: 26px; }
       .timeline::before { left: 7px; transform: none; }
       .timeline-heads { display: none; }
-      .timeline-item,
-      .timeline-item.left,
-      .timeline-item.right {
-        width: 100%;
-        margin-left: 0;
+      .tl-row {
+        grid-template-columns: 1fr;
         padding-left: 28px;
-        padding-right: 0;
+      }
+      .tl-row::before { left: 0; transform: none; }
+      .tl-exp {
         text-align: left;
       }
-      .timeline-item.left::before,
-      .timeline-item.right::before { left: 0; right: auto; }
+      .tl-out {
+        padding-left: 0;
+        margin-top: 14px;
+      }
+      .tl-out:empty { margin-top: 0; }
+      .tl-out:not(:empty)::before { display: none; }
     }
   </style>
 </head>
@@ -525,94 +632,98 @@
     <section class="section" id="experience">
       <h2>Experience</h2>
 
-      <div class="timeline-heads">
-        <span class="head-left">Work</span>
-        <span class="head-right">Education</span>
-      </div>
-
       <div class="timeline">
-        <div class="timeline-item left">
-          <span class="timeline-dates">2026 Q3</span>
-          <div class="timeline-org">Pivotal Research</div>
-          <div class="timeline-role">
-            <strong>Research Fellow</strong><br>
-            Researching personas and multi-agent interactions in long context settings under Cozmin Ududec from the UK AISI
+        <div class="tl-row">
+          <div class="tl-exp">
+            <span class="timeline-dates">2026 Q3</span>
+            <div class="timeline-org">Pivotal Research</div>
+            <div class="timeline-role">
+              <strong>Research Fellow</strong><br>
+              Researching personas and multi-agent interactions in long context settings under Cozmin Ududec from the UK AISI
+            </div>
+          </div>
+          <div class="tl-out"></div>
+        </div>
+
+        <div class="tl-row education">
+          <div class="tl-exp">
+            <span class="timeline-dates">2024 – 2026</span>
+            <div class="timeline-org">MIT</div>
+            <div class="timeline-role">
+              <strong>M.S. & MBA Student</strong><br>
+              Electrical Engineering & Computer Science (EECS), Leaders for Global Operations (LGO)
+            </div>
+          </div>
+          <div class="tl-out">
+            <div class="role-card">
+              <div class="role-org">MIT Schwarzman College of Computing</div>
+              <div class="role-meta">SERC Research Fellow · 2025 – 2026</div>
+              <div class="role-desc">Training reward models to instill risk-aversion in open-source models</div>
+              <div class="role-links">
+                <!-- TODO: replace "#" with the paper link once published (currently under review) -->
+                <a href="#">Paper&nbsp;↗</a>
+                <span class="role-note">under review</span>
+              </div>
+            </div>
+            <div class="role-card">
+              <div class="role-org">Supervised Program for Alignment Research</div>
+              <div class="role-meta">Research Fellow · 2025</div>
+              <div class="role-desc">Investigating complex persona and sycophancy interactions</div>
+              <div class="role-links">
+                <a href="https://arxiv.org/abs/2604.11609">Paper&nbsp;↗</a>
+              </div>
+            </div>
+            <div class="role-card">
+              <div class="role-org">Verizon</div>
+              <div class="role-meta">Master's Thesis · 2025</div>
+              <div class="role-desc">Agentic Reinforcement Learning for Competitor-Aware Customer Retention</div>
+              <div class="role-links">
+                <a href="https://drive.google.com/file/d/1tw2PSW-qyqH_tEMP50R1zxHqj6Ey_mEu/view?usp=sharing">Paper&nbsp;↗</a>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="timeline-item left">
-          <span class="timeline-dates">2025 - 2026</span>
-          <div class="timeline-org">MIT Schwarzman College of Computing</div>
-          <div class="timeline-role">
-            <strong>MIT Social and Ethical Responsibilities of Computing (SERC) Research Fellow</strong><br>
-            Training reward models to instill risk-aversion in open-source models
+        <div class="tl-row">
+          <div class="tl-exp">
+            <span class="timeline-dates">2020 – 2024</span>
+            <div class="timeline-org">Amazon</div>
+            <div class="timeline-role">
+              <strong>Software Engineer</strong><br>
+              Transportation Optimization (MMPO)
+            </div>
+          </div>
+          <div class="tl-out"></div>
+        </div>
+
+        <div class="tl-row education">
+          <div class="tl-exp">
+            <span class="timeline-dates">2016 – 2020</span>
+            <div class="timeline-org">Georgetown University</div>
+            <div class="timeline-role">
+              <strong>B.S. & B.A. Student</strong><br>
+              Computer Science & Economics.<br>
+              <i>George F. Baker Scholar</i>
+            </div>
+          </div>
+          <div class="tl-out">
+            <div class="role-card">
+              <div class="role-org">Jane Street</div>
+              <div class="role-meta">Strategy &amp; Product Intern · 2019</div>
+              <div class="role-desc">Previously called Business Development</div>
+            </div>
+            <div class="role-card">
+              <div class="role-org">Maxlab: Laboratory for Computational Cognitive Neuroscience</div>
+              <div class="role-meta">Research Assistant · 2017 – 2019</div>
+              <div class="role-desc">Leveraging Prior Concept Learning Improves Generalization From Few Examples in Computational Models of Human Object Recognition</div>
+              <div class="role-links">
+                <a href="https://pubmed.ncbi.nlm.nih.gov/33510629/">Paper&nbsp;↗</a>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="timeline-item left">
-          <span class="timeline-dates">2025</span>
-          <div class="timeline-org">Supervised Program for Alignment Research</div>
-          <div class="timeline-role">
-            <strong>Research Fellow</strong><br>
-            Investigating complex persona and sycophancy interactions
-          </div>
-        </div>
-
-        <div class="timeline-item left">
-          <span class="timeline-dates">2025</span>
-          <div class="timeline-org">Verizon</div>
-          <div class="timeline-role">
-            <strong>Master's Thesis</strong><br>
-            Agentic Reinforcement Learning for Competitor-Aware Customer Retention
-          </div>
-        </div>
-
-        <div class="timeline-item right">
-          <span class="timeline-dates">2024 – 2026</span>
-          <div class="timeline-org">MIT</div>
-          <div class="timeline-role">
-            <strong>M.S. & MBA Student</strong><br>
-            Electrical Engineering & Computer Science (EECS), Leaders for Global Operations (LGO)
-          </div>
-        </div>
-
-        <div class="timeline-item left">
-          <span class="timeline-dates">2020 – 2024</span>
-          <div class="timeline-org">Amazon</div>
-          <div class="timeline-role">
-            <strong>Software Engineer</strong><br>
-            Transportation Optimization (MMPO)
-          </div>
-        </div>
-
-        <div class="timeline-item left">
-          <span class="timeline-dates">2019</span>
-          <div class="timeline-org">Jane Street</div>
-          <div class="timeline-role">
-            <strong>Strategy and Product Intern</strong><br>
-            Previously called Business Development
-          </div>
-        </div>
-
-        <div class="timeline-item left">
-          <span class="timeline-dates">2017 – 2019</span>
-          <div class="timeline-org">Maxlab: Laboratory for Computational Cognitive Neuroscience</div>
-          <div class="timeline-role">
-            <strong>Research Assistant</strong><br>
-            Leveraging Prior Concept Learning Improves Generalization From Few Examples in Computational Models of Human Object Recognition
-          </div>
-        </div>
-
-        <div class="timeline-item right">
-          <span class="timeline-dates">2016 – 2020</span>
-          <div class="timeline-org">Georgetown University</div>
-          <div class="timeline-role">
-            <strong>B.S. & B.A. Student</strong><br>
-            Computer Science & Economics. <i>George F. Baker Scholar</i>
-          </div>
-        </div>
-
-        <!-- Add more timeline items as needed -->
+        <!-- Add more tl-rows as needed. Left = anchor experience, right = concurrent roles (role-card). -->
 
       </div>
     </section>
