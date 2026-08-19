@@ -342,6 +342,20 @@
       background: var(--color-border);
     }
 
+    /* Caption above the right-column card stack, e.g. "During MIT". */
+    .tl-out-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      line-height: 1.9;
+      margin-bottom: -2px;
+    }
+    .tl-row.education .tl-out-label {
+      color: var(--color-navy);
+    }
+
     /* Education rows use a navy accent instead of the default green. */
     .tl-row.education .tl-exp {
       border-right-color: var(--color-navy);
@@ -353,6 +367,12 @@
       background: var(--color-navy-pill-bg);
       color: var(--color-navy);
       border-color: var(--color-navy-pill-border);
+    }
+    .tl-row.education .role-card {
+      border-left-color: var(--color-navy);
+    }
+    .tl-row.education .role-card:hover {
+      border-left-color: var(--color-navy-hover);
     }
 
     .tl-row::before {
@@ -657,14 +677,14 @@
             </div>
           </div>
           <div class="tl-out">
+            <div class="tl-out-label">During MIT</div>
             <div class="role-card">
               <div class="role-org">MIT Schwarzman College of Computing</div>
               <div class="role-meta">SERC Research Fellow · 2025 – 2026</div>
               <div class="role-desc">Training reward models to instill risk-aversion in open-source models</div>
               <div class="role-links">
-                <!-- TODO: replace "#" with the paper link once published (currently under review) -->
-                <a href="#">Paper&nbsp;↗</a>
-                <span class="role-note">under review</span>
+                <a href="https://openreview.net/forum?id=QAOt8ol9ol">Paper&nbsp;↗</a>
+                <span class="role-note">ICML'26 Workshop</span>
               </div>
             </div>
             <div class="role-card">
@@ -709,6 +729,7 @@
             </div>
           </div>
           <div class="tl-out">
+            <div class="tl-out-label">During Georgetown</div>
             <div class="role-card">
               <div class="role-org">Jane Street</div>
               <div class="role-meta">Strategy &amp; Product Intern · 2019</div>
