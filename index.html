@@ -16,11 +16,15 @@
       --color-border: #e0ddd8;
       --color-tag-bg: #eef2ed;
       --color-tag-text: #2d5a27;
-      --color-timeline-dot: #2d5a27;
+      --color-timeline-dot: #8a867e;
       --color-navy: #1f3b66;
       --color-navy-hover: #2f558c;
       --color-navy-pill-bg: #e2e8f4;
       --color-navy-pill-border: #c7d3e8;
+      --color-orange: #b04a14;
+      --color-orange-hover: #cc6328;
+      --color-orange-pill-bg: #fbe9dd;
+      --color-orange-pill-border: #f0cdb6;
       --max-width: 720px;
     }
 
@@ -352,27 +356,50 @@
       line-height: 1.9;
       margin-bottom: -2px;
     }
-    .tl-row.education .tl-out-label {
-      color: var(--color-navy);
-    }
-
-    /* Education rows use a navy accent instead of the default green. */
-    .tl-row.education .tl-exp {
+    /* Work rows use a navy accent; education rows use burnt orange. */
+    .tl-row:not(.education) .tl-exp {
       border-right-color: var(--color-navy);
     }
-    .tl-row.education .tl-exp:hover {
+    .tl-row:not(.education) .tl-exp:hover {
       border-right-color: var(--color-navy-hover);
     }
-    .tl-row.education .timeline-org {
+    .tl-row:not(.education) .timeline-org {
       background: var(--color-navy-pill-bg);
       color: var(--color-navy);
       border-color: var(--color-navy-pill-border);
     }
-    .tl-row.education .role-card {
+    .tl-row:not(.education) .role-card {
       border-left-color: var(--color-navy);
     }
-    .tl-row.education .role-card:hover {
+    .tl-row:not(.education) .role-card:hover {
       border-left-color: var(--color-navy-hover);
+    }
+
+    .tl-row.education .tl-out-label {
+      color: var(--color-orange);
+    }
+    .tl-row.education .tl-exp {
+      border-right-color: var(--color-orange);
+    }
+    .tl-row.education .tl-exp:hover {
+      border-right-color: var(--color-orange-hover);
+    }
+    .tl-row.education .timeline-org {
+      background: var(--color-orange-pill-bg);
+      color: var(--color-orange);
+      border-color: var(--color-orange-pill-border);
+    }
+    .tl-row.education .role-card {
+      border-left-color: var(--color-orange);
+    }
+    .tl-row.education .role-card:hover {
+      border-left-color: var(--color-orange-hover);
+    }
+    .tl-row.education .role-links a {
+      color: var(--color-orange);
+    }
+    .tl-row.education .role-links a:hover {
+      color: var(--color-orange-hover);
     }
 
     .tl-row::before {
@@ -558,16 +585,16 @@
     <!-- ═══ BIO ═══ -->
     <section class="section bio" id="bio">
       <p>
-        Hi! I am currently a research fellow at Pivotal Research investigating personas and multi-agent interactions in long context settings with black-box techniques. My research mentor is Cozmin Ududec who leads the Science of Evaluation team at the UK AISI.
+        Hi, I'm Ben! I'm currently a Member of Technical Staff at <a href="https://geodesicresearch.ai/">Geodesic Research</a> in London, researching pre-training and mid-training safety interventions. Before that, I was a Pivotal research fellow studying personas and multi-agent interactions under Cozmin Ududec at UK AISI.
       </p>
       <p>
-        I just finished my master's degree at MIT where I studied EECS and entrepreneurship and was a member of MIT AI Alignment (MAIA). Before MIT, I worked as a software engineer at Amazon on truck/train routing algorithms and large scale optimization problems for their fleet across North America and Europe. I completed my undergrad at Georgetown University where I double majored in computer science and economics and was a George F. Baker Scholar. 
+        I finished my master's degree at MIT earlier this year, where I studied EECS and entrepreneurship and was part of MIT AI Alignment (MAIA). Before grad school, I spent four years as a software engineer at Amazon, working on routing and optimization for their truck and train fleets across North America and Europe. And before that, I studied computer science and economics at Georgetown, where I was a George F. Baker Scholar.
       </p>
       <p>
-        In the past year, I've been transitioning into working full-time as an AI safety researcher. My research interests are on societal impacts of AI, behavioral evals (particularly sycophancy and diverse personas), and black-box control. My experience so far is largely with multi-turn evals, training reward models, and red-teaming.
+        Outside of my work at Geodesic, my research interests include societal impacts of AI (unintentional human influence), behavioral evals (sycophancy and personas), and multi-agent communication.
       </p>
       <p>
-        <b>Hobbies</b>: I love building mechanical keyboards, doing different sports (badminton, archery, skiing, squash), and cooking & baking (I attended culinary school part-time after work while in NY, though never finished). Happy to chat!
+        <b>Hobbies</b>: I love building mechanical keyboards, playing sports (badminton, archery, skiing, squash), and cooking & baking. I attended culinary school part-time while working in New York, though I never quite finished. Happy to chat!
       </p>
       
     </section>
@@ -657,11 +684,23 @@
       <div class="timeline">
         <div class="tl-row">
           <div class="tl-exp">
+            <span class="timeline-dates">Oct 2026 - Present</span>
+            <div class="timeline-org">Geodesic Research</div>
+            <div class="timeline-role">
+              <strong>Member of Technical Staff</strong><br>
+              Pre-training & mid-training interventions
+            </div>
+          </div>
+          <div class="tl-out"></div>
+        </div>
+
+        <div class="tl-row">
+          <div class="tl-exp">
             <span class="timeline-dates">2026 Q3</span>
             <div class="timeline-org">Pivotal Research</div>
             <div class="timeline-role">
               <strong>Research Fellow</strong><br>
-              Researching personas and multi-agent interactions in long context settings under Cozmin Ududec from the UK AISI
+              Researching personas and multi-agent interactions in long context settings under Cozmin Ududec (UK AISI)
             </div>
           </div>
           <div class="tl-out"></div>
